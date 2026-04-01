@@ -54,7 +54,7 @@ sudo pacman -S android-tools
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/ADB-Device-Info.git
+git clone https://github.com/Zereniti/ADB-Device-Info.git
 cd ADB-Device-Info
 
 # Make it executable
@@ -128,7 +128,7 @@ sudo pacman -S android-tools
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/YOUR_USERNAME/ADB-Device-Info.git
+git clone https://github.com/Zereniti/ADB-Device-Info.git
 cd ADB-Device-Info
 
 # Dale permisos de ejecución
