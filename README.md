@@ -5,6 +5,28 @@
 
 ---
 
+## 📚 Table of Contents / Índice
+
+**🇬🇧 English**
+- [What is this?](#what-is-this)
+- [What it shows](#-what-it-shows)
+- [Requirements](#️-requirements)
+- [Installation & Usage](#-installation--usage)
+- [Contributing & Improvements](#-contributing--improvements)
+- [Known limitations](#️-known-limitations)
+- [License](#-license)
+
+**🇪🇸 Español**
+- [¿Qué es esto?](#qué-es-esto)
+- [Qué muestra](#-qué-muestra)
+- [Requisitos](#️-requisitos)
+- [Instalación y uso](#-instalación-y-uso)
+- [Contribuir y mejoras](#-contribuir-y-mejoras)
+- [Limitaciones conocidas](#️-limitaciones-conocidas)
+- [Licencia](#-licencia)
+
+---
+
 ## 🇬🇧 English
 
 ### What is this?
@@ -12,6 +34,8 @@
 **ADB-Device-Info** is a Bash script that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your Linux terminal.
 
 No app installation needed on the device. Just ADB, a USB cable (or wireless ADB), and this script.
+
+> ℹ️ At startup, the script asks you whether you want the output in **English or Spanish**.
 
 ### 📋 What it shows
 
@@ -64,7 +88,27 @@ chmod +x ADB-Info.sh
 ./ADB-Info.sh
 ```
 
-> **Tip:** If ADB is not at `/usr/bin/adb`, edit the `ADB=` variable at the top of the script.
+> **Tip:** If ADB is not at `/usr/bin/adb`, you can override it with an environment variable:
+> ```bash
+> ADB=/path/to/adb ./ADB-Info.sh
+> ```
+
+### 🤝 Contributing & Improvements
+
+I'm not sure if I'll keep publishing updates to this project — life gets in the way! That said, I'd love to see this script grow with the community's help.
+
+**If you improve it, fix a bug, or add support for more devices — please share it!**
+
+Here's how:
+
+1. **Fork** this repository
+2. Make your changes in your fork
+3. Open a **Pull Request** describing what you improved and why
+4. I'll review it and, if it looks good, merge it into the main repo
+
+All contributions are welcome: bug fixes, new features, better device compatibility, translations, documentation improvements... everything counts. 🙌
+
+> ⚠️ By opening a Pull Request you agree that your contribution may be merged and redistributed under the same **MIT license** as this project.
 
 ### ⚠️ Known limitations
 
@@ -86,6 +130,8 @@ MIT — see [LICENSE](LICENSE)
 **ADB-Device-Info** es un script Bash que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal Linux.
 
 No necesitas instalar nada en el móvil. Solo ADB, un cable USB (o ADB inalámbrico) y este script.
+
+> ℹ️ Al arrancar, el script te pregunta si quieres ver la información en **inglés o español**.
 
 ### 📋 Qué muestra
 
@@ -138,7 +184,27 @@ chmod +x ADB-Info.sh
 ./ADB-Info.sh
 ```
 
-> **Truco:** Si ADB no está en `/usr/bin/adb`, edita la variable `ADB=` al principio del script.
+> **Truco:** Si ADB no está en `/usr/bin/adb`, puedes indicar la ruta con una variable de entorno:
+> ```bash
+> ADB=/ruta/a/adb ./ADB-Info.sh
+> ```
+
+### 🤝 Contribuir y mejoras
+
+No tengo claro si voy a seguir publicando actualizaciones de este proyecto — ¡la vida da muchas vueltas! Aun así, me encantaría ver cómo crece con la ayuda de la comunidad.
+
+**Si lo mejoras, corriges un bug o añades soporte para más dispositivos — ¡compártelo!**
+
+Así es como puedes hacerlo:
+
+1. Haz un **fork** de este repositorio
+2. Aplica tus cambios en tu fork
+3. Abre un **Pull Request** explicando qué mejoraste y por qué
+4. Lo revisaré y, si está bien, lo fusionaré en el repositorio principal
+
+Todas las contribuciones son bienvenidas: corrección de bugs, nuevas funcionalidades, mejor compatibilidad con dispositivos, traducciones, mejoras en la documentación... todo cuenta. 🙌
+
+> ⚠️ Al abrir un Pull Request aceptas que tu contribución podrá ser fusionada y redistribuida bajo la misma licencia **MIT** de este proyecto.
 
 ### ⚠️ Limitaciones conocidas
 
@@ -153,4 +219,4 @@ MIT — ver [LICENSE](LICENSE)
 
 ---
 
-*Made with ❤️ by [Zerenity](https://github.com/YOUR_USERNAME)*
+*Made with ❤️ by [Zerenity](https://github.com/Zereniti)*
