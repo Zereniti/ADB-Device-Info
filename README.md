@@ -39,21 +39,27 @@ No app installation needed on the device. Just ADB, a USB cable (or wireless ADB
 
 ### 📋 What it shows
 
-| Category | Details |
+The output is organized in **sections** for easy reading:
+
+| Section | Fields |
 |---|---|
-| 🤖 Android version | OS version + SDK level |
-| 🏷️ Device | Model + Manufacturer |
-| 🔢 Serial number | Device serial via ADB |
-| 🧠 CPU / SoC | System-on-chip model |
-| 💾 RAM | Size · Type (LPDDR4/5) · Vendor |
-| 🖥️ Display | Resolution · DPI |
-| 🐧 Kernel | Mobile kernel version |
-| 🔋 Battery | Level · Status · Temp · Health · Cycles |
-| 💽 Storage | Official capacity + used/free/% on /data |
-| 🌍 Locale / Timezone | System locale + timezone |
-| 🔒 Bootloader | Locked / Unlocked state |
-| 📶 IMEI | IMEI 1 + IMEI 2 (dual SIM) |
-| 📡 SIM Operator | Carrier name + MCC/MNC |
+| 📱 **Device** | Android version · SDK · Model · Manufacturer · Serial · SoC |
+| 🖥️ **Display** | Resolution · DPI |
+| ⚡ **Performance** | RAM (size · type · vendor) · RAM usage · Kernel |
+| 🔋 **Battery** | Level · Status · Temperature · Health · Cycles |
+| 💽 **Storage** | Total · Used · Free · Usage % |
+| 🌍 **System** | Locale · Timezone · Bootloader state |
+| 🛡️ **Security** | Android security patch · Google Play patch · Build date |
+| 🌐 **Connectivity** | WiFi SSID · Local IP · Bluetooth version |
+| 📡 **SIM** | IMEI 1 · IMEI 2 · Operator |
+
+**Smart color indicators:**
+
+| Field | Green | Yellow | Red |
+|---|---|---|---|
+| 🔋 Battery | ≥ 31% | ≤ 30% | ≤ 15% |
+| 💽 Storage | < 70% used | 70–85% used | ≥ 86% used |
+| 💾 RAM usage | < 70% used | 70–84% used | ≥ 85% used |
 
 ### ⚙️ Requirements
 
@@ -112,10 +118,14 @@ All contributions are welcome: bug fixes, new features, better device compatibil
 
 ### ⚠️ Known limitations
 
-- **IMEI retrieval** may fail on Android 10+ due to permission restrictions introduced in newer API levels. This is a platform limitation, not a bug in the script.
-- **Battery health** data (charge_full / charge_full_design) depends on the device exposing sysfs nodes — not all manufacturers do.
-- **Storage info** is read from `/data` partition; results may vary on devices with dynamic partitions.
-- Tested primarily on **Qualcomm-based** devices. Some properties (SoC model, RAM info) may return `N/A` on other platforms.
+- **IMEI retrieval** may fail on Android 10+ due to permission restrictions. This is a platform limitation, not a bug.
+- **Battery health** depends on the device exposing sysfs nodes — not all manufacturers do.
+- **Storage total** is only auto-detected on Samsung devices and Qualcomm-based devices that expose `ro.boot.hardware.ufs`. On other devices, only used/free/% are shown.
+- **RAM type and vendor** are only available on devices that expose `ro.boot.hardware.ddr` — if not available, they are simply omitted.
+- **Bluetooth version** depends on the manufacturer exposing HCI info via `dumpsys`. May show `Not available` on some devices.
+- **WiFi SSID** may show as not connected if location permissions are restricted at system level.
+- **Google Play patch** is available on Android 10+ with GMS. May return a GMS version string instead of a date on some devices.
+- Tested primarily on **Qualcomm** and **Samsung Exynos** devices.
 
 ### 📄 License
 
@@ -135,21 +145,27 @@ No necesitas instalar nada en el móvil. Solo ADB, un cable USB (o ADB inalámbr
 
 ### 📋 Qué muestra
 
-| Categoría | Detalles |
+La salida está organizada en **secciones** para facilitar la lectura:
+
+| Sección | Campos |
 |---|---|
-| 🤖 Versión de Android | Versión del SO + nivel de SDK |
-| 🏷️ Dispositivo | Modelo + Fabricante |
-| 🔢 Número de serie | Serial del dispositivo vía ADB |
-| 🧠 CPU / SoC | Modelo del System-on-chip |
-| 💾 RAM | Tamaño · Tipo (LPDDR4/5) · Fabricante |
-| 🖥️ Pantalla | Resolución · DPI |
-| 🐧 Kernel | Versión del kernel del móvil |
-| 🔋 Batería | Nivel · Estado · Temp · Salud · Ciclos |
-| 💽 Almacenamiento | Capacidad oficial + usado/libre/% en /data |
-| 🌍 Región / Zona horaria | Locale del sistema + zona horaria |
-| 🔒 Bootloader | Estado bloqueado / desbloqueado |
-| 📶 IMEI | IMEI 1 + IMEI 2 (dual SIM) |
-| 📡 Operador SIM | Nombre del operador + MCC/MNC |
+| 📱 **Dispositivo** | Versión Android · SDK · Modelo · Fabricante · Serie · SoC |
+| 🖥️ **Pantalla** | Resolución · DPI |
+| ⚡ **Rendimiento** | RAM (tamaño · tipo · fabricante) · Uso de RAM · Kernel |
+| 🔋 **Batería** | Nivel · Estado · Temperatura · Salud · Ciclos |
+| 💽 **Almacenamiento** | Total · Usado · Libre · % de uso |
+| 🌍 **Sistema** | Locale · Zona horaria · Estado del bootloader |
+| 🛡️ **Seguridad** | Parche Android · Parche Google Play · Fecha de build |
+| 🌐 **Conectividad** | SSID WiFi · IP local · Versión Bluetooth |
+| 📡 **SIM** | IMEI 1 · IMEI 2 · Operador |
+
+**Indicadores de color inteligentes:**
+
+| Campo | Verde | Amarillo | Rojo |
+|---|---|---|---|
+| 🔋 Batería | ≥ 31% | ≤ 30% | ≤ 15% |
+| 💽 Almacenamiento | < 70% usado | 70–85% usado | ≥ 86% usado |
+| 💾 Uso de RAM | < 70% usado | 70–84% usado | ≥ 85% usado |
 
 ### ⚙️ Requisitos
 
@@ -208,10 +224,14 @@ Todas las contribuciones son bienvenidas: corrección de bugs, nuevas funcionali
 
 ### ⚠️ Limitaciones conocidas
 
-- **La lectura del IMEI** puede fallar en Android 10+ por las restricciones de permisos introducidas en versiones recientes de la API. Es una limitación de la plataforma, no un bug del script.
-- **La salud real de la batería** (charge_full / charge_full_design) depende de que el fabricante exponga los nodos sysfs correspondientes — no todos lo hacen.
-- **La información de almacenamiento** se lee de la partición `/data`; los resultados pueden variar en dispositivos con particiones dinámicas.
-- Probado principalmente en dispositivos con **SoC Qualcomm**. Algunas propiedades (modelo del SoC, info de RAM) pueden devolver `N/A` en otras plataformas.
+- **La lectura del IMEI** puede fallar en Android 10+ por restricciones de permisos. Es una limitación de la plataforma, no un bug.
+- **La salud de la batería** depende de que el fabricante exponga los nodos sysfs — no todos lo hacen.
+- **El total de almacenamiento** solo se detecta automáticamente en Samsung y en dispositivos Qualcomm que exponen `ro.boot.hardware.ufs`. En otros dispositivos, solo se muestran usado/libre/%.
+- **El tipo y fabricante de RAM** solo están disponibles en dispositivos que exponen `ro.boot.hardware.ddr` — si no están disponibles, simplemente se omiten.
+- **La versión de Bluetooth** depende de que el fabricante exponga la info HCI vía `dumpsys`. Puede mostrar `No disponible` en algunos dispositivos.
+- **El SSID WiFi** puede aparecer como no conectado si los permisos de ubicación están restringidos a nivel de sistema.
+- **El parche de Google Play** está disponible en Android 10+ con GMS. En algunos dispositivos puede devolver una cadena de versión de GMS en vez de una fecha.
+- Probado principalmente en dispositivos **Qualcomm** y **Samsung Exynos**.
 
 ### 📄 Licencia
 
