@@ -31,7 +31,9 @@
 
 ### What is this?
 
-**ADB-Device-Info** is a Bash script that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your Linux terminal.
+**ADB-Device-Info** is a tool that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your terminal.
+
+Available for **Linux/macOS** (Bash) and **Windows** (PowerShell 7+).
 
 No app installation needed on the device. Just ADB, a USB cable (or wireless ADB), and this script.
 
@@ -44,7 +46,7 @@ The output is organized in **sections** for easy reading:
 | Section | Fields |
 |---|---|
 | 📱 **Device** | Android version · SDK · Model · Manufacturer · Serial · SoC |
-| 🖥️ **Display** | Resolution · DPI |
+| 🖥️ **Display** | Resolution · DPI · Panel type (AMOLED, OLED, LCD…) |
 | ⚡ **Performance** | RAM (size · type · vendor) · RAM usage · Kernel |
 | 🔋 **Battery** | Level · Status · Temperature · Health · Cycles |
 | 💽 **Storage** | Total · Used · Free · Usage % |
@@ -57,13 +59,16 @@ The output is organized in **sections** for easy reading:
 
 | Field | Green | Yellow | Red |
 |---|---|---|---|
-| 🔋 Battery | ≥ 31% | ≤ 30% | ≤ 15% |
+| 🔋 Battery level | ≥ 31% | ≤ 30% | ≤ 15% |
+| 🔋 Battery health | ≥ 90% | 80–89% | < 80% |
+| 🌡️ Temperature | — | — | > 45°C |
 | 💽 Storage | < 70% used | 70–85% used | ≥ 86% used |
 | 💾 RAM usage | < 70% used | 70–84% used | ≥ 85% used |
 
 ### ⚙️ Requirements
 
-- Linux (tested on Fedora; should work on any distro)
+#### 🐧 Linux / macOS
+- Linux or macOS (tested on Fedora; should work on any distro)
 - `adb` installed and in PATH (or at `/usr/bin/adb`)
 - USB debugging enabled on the Android device
 - Device authorized (accepted the ADB prompt on the phone)
@@ -80,7 +85,15 @@ sudo apt install adb
 sudo pacman -S android-tools
 ```
 
+#### 🪟 Windows
+- PowerShell 7+ — [download here](https://github.com/PowerShell/PowerShell/releases)
+- ADB from [platform-tools](https://developer.android.com/tools/releases/platform-tools)
+- USB debugging enabled on the Android device
+- Device authorized (accepted the ADB prompt on the phone)
+
 ### 🚀 Installation & Usage
+
+#### 🐧 Linux / macOS
 
 ```bash
 # Clone the repository
@@ -97,6 +110,30 @@ chmod +x ADB-Info.sh
 > **Tip:** If ADB is not at `/usr/bin/adb`, you can override it with an environment variable:
 > ```bash
 > ADB=/path/to/adb ./ADB-Info.sh
+> ```
+
+#### 🪟 Windows (PowerShell 7+)
+
+```powershell
+# Clone the repository
+git clone https://github.com/Zereniti/ADB-Device-Info.git
+cd ADB-Device-Info
+
+# Unblock the script after downloading (one time only)
+Unblock-File .\ADB-Info.ps1
+
+# Connect your phone via USB with USB debugging enabled, then run:
+.\ADB-Info.ps1
+```
+
+> **Why `Unblock-File`?**  
+> Windows marks files downloaded from the internet as untrusted and blocks unsigned scripts.  
+> `Unblock-File` removes that flag from this specific file without changing any system policy.
+
+> **Tip:** If ADB is not in your PATH, you can override it with an environment variable:
+> ```powershell
+> $env:ADB = "C:\platform-tools\adb.exe"
+> .\ADB-Info.ps1
 > ```
 
 ### 🤝 Contributing & Improvements
@@ -125,6 +162,7 @@ All contributions are welcome: bug fixes, new features, better device compatibil
 - **Bluetooth version** depends on the manufacturer exposing HCI info via `dumpsys`. May show `Not available` on some devices.
 - **WiFi SSID** may show as not connected if location permissions are restricted at system level.
 - **Google Play patch** is available on Android 10+ with GMS. May return a GMS version string instead of a date on some devices.
+- **Display type** detection relies on `dumpsys SurfaceFlinger` or build properties — may not be available on all devices.
 - Tested primarily on **Qualcomm** and **Samsung Exynos** devices.
 
 ### 📄 License
@@ -137,7 +175,9 @@ MIT — see [LICENSE](LICENSE)
 
 ### ¿Qué es esto?
 
-**ADB-Device-Info** es un script Bash que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal Linux.
+**ADB-Device-Info** es una herramienta que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal.
+
+Disponible para **Linux/macOS** (Bash) y **Windows** (PowerShell 7+).
 
 No necesitas instalar nada en el móvil. Solo ADB, un cable USB (o ADB inalámbrico) y este script.
 
@@ -150,7 +190,7 @@ La salida está organizada en **secciones** para facilitar la lectura:
 | Sección | Campos |
 |---|---|
 | 📱 **Dispositivo** | Versión Android · SDK · Modelo · Fabricante · Serie · SoC |
-| 🖥️ **Pantalla** | Resolución · DPI |
+| 🖥️ **Pantalla** | Resolución · DPI · Tipo de panel (AMOLED, OLED, LCD…) |
 | ⚡ **Rendimiento** | RAM (tamaño · tipo · fabricante) · Uso de RAM · Kernel |
 | 🔋 **Batería** | Nivel · Estado · Temperatura · Salud · Ciclos |
 | 💽 **Almacenamiento** | Total · Usado · Libre · % de uso |
@@ -163,13 +203,16 @@ La salida está organizada en **secciones** para facilitar la lectura:
 
 | Campo | Verde | Amarillo | Rojo |
 |---|---|---|---|
-| 🔋 Batería | ≥ 31% | ≤ 30% | ≤ 15% |
+| 🔋 Nivel batería | ≥ 31% | ≤ 30% | ≤ 15% |
+| 🔋 Salud batería | ≥ 90% | 80–89% | < 80% |
+| 🌡️ Temperatura | — | — | > 45°C |
 | 💽 Almacenamiento | < 70% usado | 70–85% usado | ≥ 86% usado |
 | 💾 Uso de RAM | < 70% usado | 70–84% usado | ≥ 85% usado |
 
 ### ⚙️ Requisitos
 
-- Linux (probado en Fedora; debería funcionar en cualquier distro)
+#### 🐧 Linux / macOS
+- Linux o macOS (probado en Fedora; debería funcionar en cualquier distro)
 - `adb` instalado y en el PATH (o en `/usr/bin/adb`)
 - Depuración USB activada en el dispositivo Android
 - Dispositivo autorizado (haber aceptado el prompt ADB en el móvil)
@@ -186,7 +229,15 @@ sudo apt install adb
 sudo pacman -S android-tools
 ```
 
+#### 🪟 Windows
+- PowerShell 7+ — [descarga aquí](https://github.com/PowerShell/PowerShell/releases)
+- ADB desde [platform-tools](https://developer.android.com/tools/releases/platform-tools)
+- Depuración USB activada en el dispositivo Android
+- Dispositivo autorizado (haber aceptado el prompt ADB en el móvil)
+
 ### 🚀 Instalación y uso
+
+#### 🐧 Linux / macOS
 
 ```bash
 # Clona el repositorio
@@ -203,6 +254,30 @@ chmod +x ADB-Info.sh
 > **Truco:** Si ADB no está en `/usr/bin/adb`, puedes indicar la ruta con una variable de entorno:
 > ```bash
 > ADB=/ruta/a/adb ./ADB-Info.sh
+> ```
+
+#### 🪟 Windows (PowerShell 7+)
+
+```powershell
+# Clona el repositorio
+git clone https://github.com/Zereniti/ADB-Device-Info.git
+cd ADB-Device-Info
+
+# Desbloquea el script tras descargarlo (solo la primera vez)
+Unblock-File .\ADB-Info.ps1
+
+# Conecta tu móvil por USB con la depuración USB activada y ejecuta:
+.\ADB-Info.ps1
+```
+
+> **¿Por qué `Unblock-File`?**  
+> Windows marca los archivos descargados de internet como no confiables y bloquea los scripts sin firma.  
+> `Unblock-File` elimina esa marca solo de este archivo, sin modificar ninguna política del sistema.
+
+> **Truco:** Si ADB no está en el PATH, puedes indicar la ruta con una variable de entorno:
+> ```powershell
+> $env:ADB = "C:\platform-tools\adb.exe"
+> .\ADB-Info.ps1
 > ```
 
 ### 🤝 Contribuir y mejoras
@@ -231,6 +306,7 @@ Todas las contribuciones son bienvenidas: corrección de bugs, nuevas funcionali
 - **La versión de Bluetooth** depende de que el fabricante exponga la info HCI vía `dumpsys`. Puede mostrar `No disponible` en algunos dispositivos.
 - **El SSID WiFi** puede aparecer como no conectado si los permisos de ubicación están restringidos a nivel de sistema.
 - **El parche de Google Play** está disponible en Android 10+ con GMS. En algunos dispositivos puede devolver una cadena de versión de GMS en vez de una fecha.
+- **El tipo de pantalla** se detecta mediante `dumpsys SurfaceFlinger` o propiedades de build — puede no estar disponible en todos los dispositivos.
 - Probado principalmente en dispositivos **Qualcomm** y **Samsung Exynos**.
 
 ### 📄 Licencia
@@ -239,4 +315,4 @@ MIT — ver [LICENSE](LICENSE)
 
 ---
 
-*Made with ❤️ by [Zerenity](https://github.com/Zereniti)*
+*Made with ❤️ by [Zerenity](https://github.com/Zerenity)*
