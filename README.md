@@ -3,6 +3,16 @@
 > **A fastfetch-style device info tool for Android — via ADB**  
 > **Una herramienta tipo fastfetch para obtener información detallada de Android — vía ADB**
 
+<!-- 
+  SCREENSHOTS: Place two side-by-side screenshots here.
+  One in English, one in Spanish.
+  Censor before uploading: Serial number, IMEI 1, IMEI 2, Local IP, WiFi SSID (optional).
+  Suggested markdown:
+-->
+
+![ADB-Device-Info English](screenshots/preview_en.png)
+![ADB-Device-Info Español](screenshots/preview_es.png)
+
 ---
 
 ## 📚 Table of Contents / Índice
@@ -31,9 +41,9 @@
 
 ### What is this?
 
-**ADB-Device-Info** is a tool that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your terminal.
+**ADB-Device-Info** is a tool that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your terminal, with an Android ASCII logo displayed alongside the output.
 
-Available for **Linux/macOS** (Bash) and **Windows** (PowerShell 7+).
+The **recommended version is `ADB-Info.py`** — a single Python script that works on Linux, macOS and Windows with no platform-specific setup. Legacy Bash and PowerShell scripts are also available.
 
 No app installation needed on the device. Just ADB, a USB cable (or wireless ADB), and this script.
 
@@ -41,19 +51,13 @@ No app installation needed on the device. Just ADB, a USB cable (or wireless ADB
 
 ### 📋 What it shows
 
-The output is organized in **sections** for easy reading:
+The output is organized in **3 sections** for easy reading:
 
 | Section | Fields |
 |---|---|
-| 📱 **Device** | Android version · SDK · Model · Manufacturer · Serial · SoC |
-| 🖥️ **Display** | Resolution · DPI · Panel type (AMOLED, OLED, LCD…) |
-| ⚡ **Performance** | RAM (size · type · vendor) · RAM usage · Kernel |
-| 🔋 **Battery** | Level · Status · Temperature · Health · Cycles |
-| 💽 **Storage** | Total · Used · Free · Usage % |
-| 🌍 **System** | Locale · Timezone · Bootloader state |
-| 🛡️ **Security** | Android security patch · Google Play patch · Build date |
-| 🌐 **Connectivity** | WiFi SSID · Local IP · Bluetooth version |
-| 📡 **SIM** | IMEI 1 · IMEI 2 · Operator |
+| 🖥️ **System** | Android version · SDK · Model · Manufacturer · Serial · Locale · Timezone · Bootloader · Security patches · Build date |
+| ⚡ **Hardware** | CPU/SoC · Display · RAM (size · type · vendor · usage) · Kernel · Battery · Storage |
+| 🌐 **Connectivity** | WiFi SSID · Local IP · Bluetooth version · IMEI 1 · IMEI 2 · SIM Operator |
 
 **Smart color indicators:**
 
@@ -67,82 +71,99 @@ The output is organized in **sections** for easy reading:
 
 ### ⚙️ Requirements
 
-#### 🐧 Linux / macOS
-- Linux or macOS (tested on Fedora; should work on any distro)
-- `adb` installed and in PATH (or at `/usr/bin/adb`)
+#### 🐍 Python (recommended — all platforms)
+- Python 3.8+
+- ADB in PATH — [platform-tools](https://developer.android.com/tools/releases/platform-tools)
 - USB debugging enabled on the Android device
 - Device authorized (accepted the ADB prompt on the phone)
 
+**Install Python:**
+```bash
+# Arch
+sudo pacman -S python
+
+# Fedora / RHEL
+sudo dnf install python3
+
+# Debian / Ubuntu
+sudo apt install python3
+
+# Windows — https://www.python.org/downloads/
+```
+
 **Install ADB:**
 ```bash
+# Arch
+sudo pacman -S android-tools
+
 # Fedora / RHEL
 sudo dnf install android-tools
 
 # Debian / Ubuntu
 sudo apt install adb
 
-# Arch
-sudo pacman -S android-tools
+# Windows — https://developer.android.com/tools/releases/platform-tools
 ```
 
-#### 🪟 Windows
-- PowerShell 7+ — [download here](https://github.com/PowerShell/PowerShell/releases)
+#### 🐧 Legacy: Linux / macOS (Bash)
+- Bash 4+
+- `adb` installed and in PATH
+
+#### 🪟 Legacy: Windows (PowerShell)
+- PowerShell 7+
 - ADB from [platform-tools](https://developer.android.com/tools/releases/platform-tools)
-- USB debugging enabled on the Android device
-- Device authorized (accepted the ADB prompt on the phone)
 
 ### 🚀 Installation & Usage
 
-#### 🐧 Linux / macOS
+#### 🐍 Python — recommended (Linux / macOS / Windows)
 
 ```bash
 # Clone the repository
 git clone https://github.com/Zereniti/ADB-Device-Info.git
 cd ADB-Device-Info
 
-# Make it executable
-chmod +x ADB-Info.sh
-
 # Connect your phone via USB with USB debugging enabled, then run:
-./ADB-Info.sh
+python3 ADB-Info.py        # Linux / macOS
+python ADB-Info.py         # Windows
 ```
 
-> **Tip:** If ADB is not at `/usr/bin/adb`, you can override it with an environment variable:
+> **Tip:** If ADB is not in your PATH, you can override it:
 > ```bash
-> ADB=/path/to/adb ./ADB-Info.sh
+> ADB=/path/to/adb python3 ADB-Info.py          # Linux / macOS
+> $env:ADB="C:\platform-tools\adb.exe"; python ADB-Info.py  # Windows
 > ```
 
-#### 🪟 Windows (PowerShell 7+)
+#### 🐧 Legacy: Linux / macOS (Bash)
+
+```bash
+chmod +x ADB-Info.sh
+./ADB-Info.sh
+
+# Custom ADB path:
+ADB=/path/to/adb ./ADB-Info.sh
+```
+
+#### 🪟 Legacy: Windows (PowerShell 7+)
 
 ```powershell
-# Clone the repository
-git clone https://github.com/Zereniti/ADB-Device-Info.git
-cd ADB-Device-Info
-
-# Unblock the script after downloading (one time only)
+# Unblock after downloading (one time only)
 Unblock-File .\ADB-Info.ps1
+.\ADB-Info.ps1
 
-# Connect your phone via USB with USB debugging enabled, then run:
+# Custom ADB path:
+$env:ADB = "C:\platform-tools\adb.exe"
 .\ADB-Info.ps1
 ```
 
 > **Why `Unblock-File`?**  
-> Windows marks files downloaded from the internet as untrusted and blocks unsigned scripts.  
-> `Unblock-File` removes that flag from this specific file without changing any system policy.
-
-> **Tip:** If ADB is not in your PATH, you can override it with an environment variable:
-> ```powershell
-> $env:ADB = "C:\platform-tools\adb.exe"
-> .\ADB-Info.ps1
-> ```
+> Windows marks downloaded files as untrusted and blocks unsigned scripts.  
+> `Unblock-File` removes that flag from this specific file only, without changing any system policy.
 
 ### 🤝 Contributing & Improvements
 
 I'm not sure if I'll keep publishing updates to this project — life gets in the way! That said, I'd love to see this script grow with the community's help.
 
 **If you improve it, fix a bug, or add support for more devices — please share it!**
-
-Here's how:
 
 1. **Fork** this repository
 2. Make your changes in your fork
@@ -163,6 +184,7 @@ All contributions are welcome: bug fixes, new features, better device compatibil
 - **WiFi SSID** may show as not connected if location permissions are restricted at system level.
 - **Google Play patch** is available on Android 10+ with GMS. May return a GMS version string instead of a date on some devices.
 - **Display type** detection relies on `dumpsys SurfaceFlinger` or build properties — may not be available on all devices.
+- **ASCII logo alignment** depends on terminal font and width — best viewed with a monospace font (e.g. JetBrains Mono, Fira Code, Cascadia Code).
 - Tested primarily on **Qualcomm** and **Samsung Exynos** devices.
 
 ### 📄 License
@@ -175,9 +197,9 @@ MIT — see [LICENSE](LICENSE)
 
 ### ¿Qué es esto?
 
-**ADB-Device-Info** es una herramienta que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal.
+**ADB-Device-Info** es una herramienta que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal, con el logo ASCII de Android mostrado junto a la información.
 
-Disponible para **Linux/macOS** (Bash) y **Windows** (PowerShell 7+).
+La **versión recomendada es `ADB-Info.py`** — un único script Python que funciona en Linux, macOS y Windows sin configuración específica por plataforma. También se mantienen los scripts legacy de Bash y PowerShell.
 
 No necesitas instalar nada en el móvil. Solo ADB, un cable USB (o ADB inalámbrico) y este script.
 
@@ -185,19 +207,13 @@ No necesitas instalar nada en el móvil. Solo ADB, un cable USB (o ADB inalámbr
 
 ### 📋 Qué muestra
 
-La salida está organizada en **secciones** para facilitar la lectura:
+La salida está organizada en **3 secciones** para facilitar la lectura:
 
 | Sección | Campos |
 |---|---|
-| 📱 **Dispositivo** | Versión Android · SDK · Modelo · Fabricante · Serie · SoC |
-| 🖥️ **Pantalla** | Resolución · DPI · Tipo de panel (AMOLED, OLED, LCD…) |
-| ⚡ **Rendimiento** | RAM (tamaño · tipo · fabricante) · Uso de RAM · Kernel |
-| 🔋 **Batería** | Nivel · Estado · Temperatura · Salud · Ciclos |
-| 💽 **Almacenamiento** | Total · Usado · Libre · % de uso |
-| 🌍 **Sistema** | Locale · Zona horaria · Estado del bootloader |
-| 🛡️ **Seguridad** | Parche Android · Parche Google Play · Fecha de build |
-| 🌐 **Conectividad** | SSID WiFi · IP local · Versión Bluetooth |
-| 📡 **SIM** | IMEI 1 · IMEI 2 · Operador |
+| 🖥️ **Sistema** | Versión Android · SDK · Modelo · Fabricante · Serie · Locale · Zona horaria · Bootloader · Parches de seguridad · Fecha de build |
+| ⚡ **Hardware** | CPU/SoC · Pantalla · RAM (tamaño · tipo · fabricante · uso) · Kernel · Batería · Almacenamiento |
+| 🌐 **Conectividad** | SSID WiFi · IP local · Versión Bluetooth · IMEI 1 · IMEI 2 · Operador SIM |
 
 **Indicadores de color inteligentes:**
 
@@ -211,62 +227,87 @@ La salida está organizada en **secciones** para facilitar la lectura:
 
 ### ⚙️ Requisitos
 
-#### 🐧 Linux / macOS
-- Linux o macOS (probado en Fedora; debería funcionar en cualquier distro)
-- `adb` instalado y en el PATH (o en `/usr/bin/adb`)
+#### 🐍 Python (recomendado — todas las plataformas)
+- Python 3.8+
+- ADB en el PATH — [platform-tools](https://developer.android.com/tools/releases/platform-tools)
 - Depuración USB activada en el dispositivo Android
 - Dispositivo autorizado (haber aceptado el prompt ADB en el móvil)
 
+**Instalar Python:**
+```bash
+# Arch
+sudo pacman -S python
+
+# Fedora / RHEL
+sudo dnf install python3
+
+# Debian / Ubuntu
+sudo apt install python3
+
+# Windows — https://www.python.org/downloads/
+```
+
 **Instalar ADB:**
 ```bash
+# Arch
+sudo pacman -S android-tools
+
 # Fedora / RHEL
 sudo dnf install android-tools
 
 # Debian / Ubuntu
 sudo apt install adb
 
-# Arch
-sudo pacman -S android-tools
+# Windows — https://developer.android.com/tools/releases/platform-tools
 ```
 
-#### 🪟 Windows
-- PowerShell 7+ — [descarga aquí](https://github.com/PowerShell/PowerShell/releases)
+#### 🐧 Legacy: Linux / macOS (Bash)
+- Bash 4+
+- `adb` instalado y en el PATH
+
+#### 🪟 Legacy: Windows (PowerShell)
+- PowerShell 7+
 - ADB desde [platform-tools](https://developer.android.com/tools/releases/platform-tools)
-- Depuración USB activada en el dispositivo Android
-- Dispositivo autorizado (haber aceptado el prompt ADB en el móvil)
 
 ### 🚀 Instalación y uso
 
-#### 🐧 Linux / macOS
+#### 🐍 Python — recomendado (Linux / macOS / Windows)
 
 ```bash
 # Clona el repositorio
 git clone https://github.com/Zereniti/ADB-Device-Info.git
 cd ADB-Device-Info
 
-# Dale permisos de ejecución
-chmod +x ADB-Info.sh
-
 # Conecta tu móvil por USB con la depuración USB activada y ejecuta:
-./ADB-Info.sh
+python3 ADB-Info.py        # Linux / macOS
+python ADB-Info.py         # Windows
 ```
 
-> **Truco:** Si ADB no está en `/usr/bin/adb`, puedes indicar la ruta con una variable de entorno:
+> **Truco:** Si ADB no está en el PATH, puedes indicar la ruta:
 > ```bash
-> ADB=/ruta/a/adb ./ADB-Info.sh
+> ADB=/ruta/a/adb python3 ADB-Info.py                              # Linux / macOS
+> $env:ADB="C:\platform-tools\adb.exe"; python ADB-Info.py         # Windows
 > ```
 
-#### 🪟 Windows (PowerShell 7+)
+#### 🐧 Legacy: Linux / macOS (Bash)
+
+```bash
+chmod +x ADB-Info.sh
+./ADB-Info.sh
+
+# Ruta ADB personalizada:
+ADB=/ruta/a/adb ./ADB-Info.sh
+```
+
+#### 🪟 Legacy: Windows (PowerShell 7+)
 
 ```powershell
-# Clona el repositorio
-git clone https://github.com/Zereniti/ADB-Device-Info.git
-cd ADB-Device-Info
-
 # Desbloquea el script tras descargarlo (solo la primera vez)
 Unblock-File .\ADB-Info.ps1
+.\ADB-Info.ps1
 
-# Conecta tu móvil por USB con la depuración USB activada y ejecuta:
+# Ruta ADB personalizada:
+$env:ADB = "C:\platform-tools\adb.exe"
 .\ADB-Info.ps1
 ```
 
@@ -274,19 +315,11 @@ Unblock-File .\ADB-Info.ps1
 > Windows marca los archivos descargados de internet como no confiables y bloquea los scripts sin firma.  
 > `Unblock-File` elimina esa marca solo de este archivo, sin modificar ninguna política del sistema.
 
-> **Truco:** Si ADB no está en el PATH, puedes indicar la ruta con una variable de entorno:
-> ```powershell
-> $env:ADB = "C:\platform-tools\adb.exe"
-> .\ADB-Info.ps1
-> ```
-
 ### 🤝 Contribuir y mejoras
 
 No tengo claro si voy a seguir publicando actualizaciones de este proyecto — ¡la vida da muchas vueltas! Aun así, me encantaría ver cómo crece con la ayuda de la comunidad.
 
 **Si lo mejoras, corriges un bug o añades soporte para más dispositivos — ¡compártelo!**
-
-Así es como puedes hacerlo:
 
 1. Haz un **fork** de este repositorio
 2. Aplica tus cambios en tu fork
@@ -307,6 +340,7 @@ Todas las contribuciones son bienvenidas: corrección de bugs, nuevas funcionali
 - **El SSID WiFi** puede aparecer como no conectado si los permisos de ubicación están restringidos a nivel de sistema.
 - **El parche de Google Play** está disponible en Android 10+ con GMS. En algunos dispositivos puede devolver una cadena de versión de GMS en vez de una fecha.
 - **El tipo de pantalla** se detecta mediante `dumpsys SurfaceFlinger` o propiedades de build — puede no estar disponible en todos los dispositivos.
+- **La alineación del logo ASCII** depende de la fuente y el ancho de la terminal — se ve mejor con fuentes monoespaciadas (p. ej. JetBrains Mono, Fira Code, Cascadia Code).
 - Probado principalmente en dispositivos **Qualcomm** y **Samsung Exynos**.
 
 ### 📄 Licencia
