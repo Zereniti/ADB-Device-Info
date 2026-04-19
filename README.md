@@ -1,7 +1,7 @@
 # 📱 ADB-Device-Info
 
-> **A fastfetch-style device info tool for Android — via ADB**  
-> **Una herramienta tipo fastfetch para obtener información detallada de Android — vía ADB**
+> **A fastfetch-style device info tool for Android — via Android Debug Bridge (ADB)**  
+> **Una herramienta tipo fastfetch para obtener información detallada de Android — vía Android Debug Bridge (ADB)**
 
 <div align="center">
   <img src="screenshots/Ingles ADI.png" alt="ADB-Device-Info preview" width="700"/>
