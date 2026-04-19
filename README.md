@@ -3,9 +3,6 @@
 > **A fastfetch-style device info tool for Android — via ADB**  
 > **Una herramienta tipo fastfetch para obtener información detallada de Android — vía ADB**
 
-<img width="1228" height="807" alt="Ingles ADI" src="https://github.com/user-attachments/assets/dcb3e907-b07d-41bf-bcf8-926bae962d40" />
-<img width="1220" height="801" alt="Español ADI" src="https://github.com/user-attachments/assets/e0f284f9-6b58-4c4e-9094-70bc06664d9e" />
-
 ---
 
 ## 📚 Table of Contents / Índice
