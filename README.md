@@ -82,7 +82,7 @@ sudo dnf install python3
 # Debian / Ubuntu
 sudo apt install python3
 
-# Windows — https://www.python.org/downloads/
+# Windows — winget install -e --id Python.Python.3.14
 ```
 
 **Install ADB:**
@@ -238,7 +238,7 @@ sudo dnf install python3
 # Debian / Ubuntu
 sudo apt install python3
 
-# Windows — https://www.python.org/downloads/
+# Windows — winget install -e --id Python.Python.3.14
 ```
 
 **Instalar ADB:**
