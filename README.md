@@ -3,6 +3,10 @@
 > **A fastfetch-style device info tool for Android — via ADB**  
 > **Una herramienta tipo fastfetch para obtener información detallada de Android — vía ADB**
 
+<div align="center">
+  <img src="screenshots/preview_en.png" alt="ADB-Device-Info preview" width="700"/>
+</div>
+
 ---
 
 ## 📚 Table of Contents / Índice
@@ -78,7 +82,7 @@ sudo dnf install python3
 # Debian / Ubuntu
 sudo apt install python3
 
-# Windows — winget install -e --id Python.Python.3.14
+# Windows — https://www.python.org/downloads/
 ```
 
 **Install ADB:**
@@ -234,7 +238,7 @@ sudo dnf install python3
 # Debian / Ubuntu
 sudo apt install python3
 
-# Windows — winget install -e --id Python.Python.3.14
+# Windows — https://www.python.org/downloads/
 ```
 
 **Instalar ADB:**
