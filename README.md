@@ -4,7 +4,7 @@
 > **Una herramienta tipo fastfetch para obtener información detallada de Android — vía ADB**
 
 <div align="center">
-  <img src="screenshots/preview_en.png" alt="ADB-Device-Info preview" width="700"/>
+  <img src="screenshots/Ingles ADI.png" alt="ADB-Device-Info preview" width="700"/>
 </div>
 
 ---
