@@ -10,7 +10,7 @@
   Suggested markdown:
 -->
 
-![ADB-Device-Info English](screenshots/preview_en.png)
+![ADB-Device-Info English](<img width="1228" height="807" alt="Ingles ADI" src="https://github.com/user-attachments/assets/4f9faf7f-f602-4159-b55e-b9a9ae8636f8" />)
 ![ADB-Device-Info Español](screenshots/preview_es.png)
 
 ---
