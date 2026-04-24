@@ -82,7 +82,8 @@ sudo dnf install python3
 # Debian / Ubuntu
 sudo apt install python3
 
-# Windows — winget install -e --id Python.Python.3.14
+# Windows
+winget install -e --id Python.Python.3.14
 ```
 
 **Install ADB:**
@@ -96,7 +97,8 @@ sudo dnf install android-tools
 # Debian / Ubuntu
 sudo apt install adb
 
-# Windows — https://developer.android.com/tools/releases/platform-tools
+# Windows
+https://developer.android.com/tools/releases/platform-tools
 ```
 
 #### 🐧 Legacy: Linux / macOS (Bash)
@@ -238,7 +240,8 @@ sudo dnf install python3
 # Debian / Ubuntu
 sudo apt install python3
 
-# Windows — winget install -e --id Python.Python.3.14
+# Windows
+winget install -e --id Python.Python.3.14
 ```
 
 **Instalar ADB:**
@@ -252,7 +255,8 @@ sudo dnf install android-tools
 # Debian / Ubuntu
 sudo apt install adb
 
-# Windows — https://developer.android.com/tools/releases/platform-tools
+# Windows
+https://developer.android.com/tools/releases/platform-tools
 ```
 
 #### 🐧 Legacy: Linux / macOS (Bash)
