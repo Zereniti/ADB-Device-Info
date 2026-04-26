@@ -1,4 +1,4 @@
-# 📱 ADB-Device-Info
+# 📱 ADI (ADB-Device-Info)
 
 > **A fastfetch-style device info tool for Android — via Android Debug Bridge (ADB)**  
 > **Una herramienta tipo fastfetch para obtener información detallada de Android — vía Android Debug Bridge (ADB)**
@@ -35,7 +35,7 @@
 
 ### What is this?
 
-**ADB-Device-Info** is a tool that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your terminal, with an Android ASCII logo displayed alongside the output.
+**ADI (ADB-Device-Info)** is a tool that connects to an Android device via ADB and displays detailed system information in a clean, colorized, fastfetch-inspired format — directly from your terminal, with an Android ASCII logo displayed alongside the output.
 
 The **recommended version is `ADB-Info.py`** — a single Python script that works on Linux, macOS and Windows with no platform-specific setup. Legacy Bash and PowerShell scripts are also available.
 
@@ -193,7 +193,7 @@ MIT — see [LICENSE](LICENSE)
 
 ### ¿Qué es esto?
 
-**ADB-Device-Info** es una herramienta que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal, con el logo ASCII de Android mostrado junto a la información.
+**ADI (ADB-Device-Info)** es una herramienta que se conecta a un dispositivo Android vía ADB y muestra información detallada del sistema en un formato limpio y colorizado al estilo de fastfetch, directamente desde tu terminal, con el logo ASCII de Android mostrado junto a la información.
 
 La **versión recomendada es `ADB-Info.py`** — un único script Python que funciona en Linux, macOS y Windows sin configuración específica por plataforma. También se mantienen los scripts legacy de Bash y PowerShell.
 
